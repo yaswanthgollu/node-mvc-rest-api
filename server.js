@@ -36,9 +36,12 @@ app.use(express.json());
 // serve static files
 app.use('/', express.static(path.join(__dirname, 'public')));
 
-app.use('/', require('./routes/root'));
-app.use('/employees', require('./routes/api/employees'));
 
+// Routes 
+app.use('/', require('./Routes/root'));
+app.use('/register', require('./Routes/register'));
+app.use('/employees', require('./Routes/api/employees'));
+app.use('/auth', require('./Routes/auth'));
 
 // // Default route handler for 404
 // app.get('{*splat}', (req, res) => {

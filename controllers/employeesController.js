@@ -2,7 +2,7 @@
 // data.employees = require('../data/data.json');
 
 const data = {
-    employees: require('../data/data.json'),
+    employees: require('../model/data.json'),
     setEmployees: function (data) {this.employees = data}
 };
 
