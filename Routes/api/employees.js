@@ -3,13 +3,14 @@ const router = express.Router();
 // const path = require('path');
 const employeeController = require('../../controllers/employeesController.js');
 const verifyJWT = require('../../middleware/verifyJWT');
-
+const ROLES_LIST = require('../../config/roles_list');
+const verifyRoles = require('../../middleware/verifyRoles');
 
 router.route('/')
-    .get(verifyJWT, employeeController.getAllEmployees)
-    .post(employeeController.createNewEmployee)
-    .put(employeeController.updateEmployee)
-    .delete(employeeController.DeleteEmployee);
+    .get(employeeController.getAllEmployees)
+    .post(verifyRoles(ROLES_LIST.Admin, ROLES_LIST.Editor),employeeController.createNewEmployee)
+    .put(verifyRoles(ROLES_LIST.Admin, ROLES_LIST.Editor),employeeController.updateEmployee)
+    .delete(verifyRoles(ROLES_LIST.Admin),employeeController.DeleteEmployee);
 
 router.route('/:id')
     .get(employeeController.getEmployee);
